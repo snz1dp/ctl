@@ -1,0 +1,131 @@
+
+banner: |+
+  .____            _ ____  ____  
+  / ___| _ __  ___/ |  _ \|  _ \ 
+  \___ \| '_ \|_  / | | | | |_) |
+   ___) | | | |/ /| | |_| |  __/ 
+  |____/|_| |_/___|_|____/|_|    
+                             1.2
+   Snz1DP command line utility
+
+website: https://alidocs.dingtalk.com/i/nodes/1DKw2zgV2vkxoOzgf1rDyzwwVB5r9YAn?utm_scene=team_space
+
+newhint: |
+  ✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨
+  ✨ snz1dpctl have new version avaible!    ✨
+  ✨       👉  snz1dpctl upgrade  👈        ✨
+  ✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨
+
+snz1dp:
+  server:
+    url: https://snz1.cn/develop/platform/api/configs
+    git: https://snz1.cn/gitrepo/
+
+  download:
+    env:
+      arg: SNZ1DP_DOWNLOAD_URL
+    default: https://snz1.cn/snz1dp/download/
+  ctl:
+    name: snz1dpctl
+    pinger: snz1.cn
+    url: https://snz1.cn/snz1dp/download/
+    home:
+      env:
+        arg: SNZ1DP_HOME
+      default: ~/.snz1dp
+  docker:
+    url: snz1.cn
+    secure: true
+  helm:
+    url: https://snz1.cn/nexus/repository/helm-hosted/
+    name: snz1dp-nexus
+    push: nexus-push
+    user_arg: -u
+    pwd_arg: -p
+  maven:
+    id: snz1
+    url: https://snz1.cn/nexus/repository/maven-public/
+    mirrors:
+    - id: aliyun
+      url: http://maven.aliyun.com/nexus/content/groups/public/
+      mirrorOf: central
+  npm:
+    private: false
+    id: npm
+    url: https://registry.npmjs.org/
+    sass-binary-site:
+      id: node-sass-site
+      url: https://cdn.npmmirror.com/binaries/node-sass/
+      private: false
+
+  k8s:
+    image:
+      prefix: https://github.com/AliyunContainerService/k8s-for-docker-desktop/raw/v
+      filename: images.properties
+
+  sonar:
+    url: https://snz1.cn/sonarqube/
+
+kubectl:
+  name: kubectl
+  url: https://snz1.cn/snz1dp/download/kubectl/v
+  version: "1.18.0"
+
+haproxy:
+  image: k8s-deploy/haproxy
+  tag: v1.0
+  version: 1.0.0
+
+keepalived:
+  image: k8s-deploy/keepalived
+  tag: v1.0
+  version: 1.0.0
+
+buildx:
+  version: 0.11.2
+  prefix: https://snz1.cn/snz1dp/download/docker/
+
+mvw:
+  url: https://snz1.cn/snz1dp/download/mvnw-0.5.6.tgz
+  distribution_url: https://snz1.cn/snz1dp/download/apache-maven-3.6.3-bin.zip
+  wrapper_url: https://snz1.cn/snz1dp/download/maven-wrapper.jar
+
+helm:
+  url: https://snz1.cn/snz1dp/download/helm/
+  name: helm
+  version: v3.12.0
+  suffix: tgz
+  plugin: dp/tool/helm-nexus-push.git
+  windows-plugin: dp/tool/windows-helm-nexus-push.git
+
+archetype:
+  version: "2.4.3"
+  group: com.snz1.archetype
+  artifact: backend-archetype
+  url: https://snz1.cn/snz1dp/download/backend-archetype-2.4.3-SNAPSHOT.jar
+
+vueproject:
+  url: https://snz1.cn/snz1dp/download/vue-element-ui-demo-1.0.0.tgz
+
+node:
+  name: node
+  url: https://snz1.cn/snz1dp/download/nodejs/
+  version: "16.20.2"
+  suffix: tgz
+
+sonar:
+  url: https://snz1.cn/snz1dp/download/sonar-scanner/
+  name: sonar-scanner
+  version: 4.4.0.2170
+  suffix: tgz
+
+runner:
+  docker:
+    image: snz1dp/runner:1.0.0
+
+nvm:
+  name: "nvm"
+  version: 0.39.7
+  windows:
+    version: 1.1.12
+    suffix: tgz

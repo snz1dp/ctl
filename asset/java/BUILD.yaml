@@ -1,0 +1,144 @@
+# 编译类型
+type: maven
+
+# 名称
+name: {{ .Name }}
+desciption: 应用标题
+
+# 镜像编译参数
+docker:
+  # 镜像名称
+  image: {{ .DockerHub }}{{ .Name }}
+  # 镜像编译文件(默认：Dockerfile)
+  file: Dockerfile
+
+# 服务定义
+service:
+
+  # 端口定义
+  ports:
+  - 9081:80
+
+  # 环境变量
+  envs:
+  # 默认使用生产配置文件
+  - CONFIG_PROFILE=prod
+  # JWT访问令牌
+  - JWT_TOKEN="[[{ .Snz1dp.Jwt.Token }]]"
+  # JWT应用私钥
+  - JWT_PRIVKEY="[[{ .Snz1dp.Jwt.PrivateKey }]]"
+  # JDBC驱动类型
+  - JDBC_DRIVER="org.postgresql.Driver"
+  # JDBC访问地址
+  - JDBC_URL="jdbc:postgresql://[[{ .Postgres.Host }]]:[[{ .Postgres.Port }]]/demo"
+  # JDBC用户名
+  - JDBC_USER="[[{ .Postgres.Admin.Username }]]"
+  # JDBC用户密码
+  - JDBC_PASSWORD="[[{ .Postgres.Admin.Password }]]"
+  # 缓存类型：redis、ehcache、none
+  - CACHE_TYPE=redis
+  # REDIS密码
+  - REDIS_PASSWORD="[[{ .Redis.Password }]]"
+  # REDIS主机及端口
+  - REDIS_SERVER="[[{ .Redis.Host }]]:[[{ .Redis.Port }]]"
+  # REDIS数据库索引
+  - REDIS_DB=6
+  # 默认初始化用户
+  - INITIAL_USERNAME="[[{ .Snz1dp.Admin.Username }]]"
+  # 默认初始化密码
+  - INITIAL_PASSWORD="[[{ .Snz1dp.Admin.Password }]]"
+  # 动态配置类型：cluster（集群）、cache(缓存)、none（无）
+  - CONFIG_TYPE=cluster
+  # 动态配置服务地址
+  - CONFIG_URL="[[{ .Confserv.Web.Protocol }]]://[[{ .Confserv.Web.Host }]]:[[{ .Confserv.Web.Port }]][[{ .Confserv.Web.Webroot }]]"
+  # 组织用户服务地址
+  - XEAI_URL="[[{ .Xeai.Web.Protocol }]]://[[{ .Xeai.Web.Host }]]:[[{ .Xeai.Web.Port }]][[{ .Xeai.Web.Webroot }]]"
+
+  # 心跳检查
+  healthcheck:
+    url: /{{ .Name }}/api/health
+    interval: 60s
+    timeout: 6s
+    period: 30s
+    retries: 30
+
+  # 路由定义
+  ingress:
+  - backend-port: 80
+    strip-path: false
+    preserve-host: true
+    sso:
+    - /{{ .Name }}/api
+    - /{{ .Name }}/api/health
+    - /{{ .Name }}/api/version
+    - /{{ .Name }}/api/v3
+    - /{{ .Name }}/api/swagger-ui
+    - /{{ .Name }}/api/swagger-resources
+    - /{{ .Name }}/api/webjars
+
+  # 内置文件
+  # files:
+  #   test.sh: |
+  #     #!/bin/bash
+  #     echo "test"
+
+  # 卷组挂载
+  # volumes:
+  #   - test.sh:/test/app/test.sh
+  #   - data:/app/data
+
+# 开发配置
+develop:
+  # 开发运行时依赖配置
+  config: |
+    # values:
+    #   ...
+    postgres:
+      admin:
+        username: postgres
+        password: snz1dp9527
+      host: postgres
+      install: true
+      port: 5432
+      version: "14.10"
+    redis:
+      password: snz1dp9527
+      host: redis
+      install: true
+      port: 6379
+      version: 6.2.5
+    appgateway:
+      admin:
+        host: ingress
+        port: 91
+        protocol: http
+      install: true
+      version: 2.8.4
+      web:
+        host: ingress
+        port: 80
+        protocol: http
+    confserv:
+      install: true
+      version: 2.2.3
+      web:
+        host: confserv
+        port: 80
+        protocol: http
+        webroot: /appconfig
+    xeai:
+      install: true
+      version: 2.6.8
+      web:
+        host: xeai
+        port: 80
+    snz1dp:
+      admin:
+        username: root
+        email: root@localhost.com
+        password: 123456
+      ingress:
+        host: localhost
+        port: 80
+        protocol: http
+      timezone: Asia/Shanghai

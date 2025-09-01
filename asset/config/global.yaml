@@ -1,0 +1,71 @@
+
+# kubernetes
+kubernetes:
+  config: ~/.kube/config # kubectl file path, ~/ is user home
+  context: "" # default kubernetes context in config
+  storageclass: hostpath # use kubectl get storageclass
+
+# Snz1Dp
+snz1dp:
+  version: 1.2.19
+  namespace: snz1dp-system # snz1dp install namespace
+  # snz1dp ingress configuration
+  ingress:
+    host: localhost # domain host or ip of ingress
+    protocol: http # protocol of protocol(http,https)
+  timezone: Asia/Shanghai # default timezone
+  organization: "ChangSha SNZ1" # name of group
+  admin:
+    username: root
+    email: root@localhost.com
+    password: 123456
+
+# postgres
+postgres:
+  version: "14.10"
+  install: false
+  admin:
+    username: postgres
+    password: snz1dp9527
+  host: postgres
+  port: 5432
+
+# redis
+redis:
+  version: 6.2.5
+  install: false
+  password: snz1dp9527
+  host: redis
+  port: 6379
+
+# appgateway ingress
+appgateway:
+  install: false
+  version: 2.8.4
+  admin:
+    host: ingress
+    port: 91
+  web:
+    host: ingress
+    port: 80
+    protocol: http
+
+# configserv
+confserv:
+  install: false
+  version: 2.2.3
+  web:
+    host: confserv
+    port: 80
+    protocol: http
+    webroot: /appconfig
+
+# xeai
+xeai:
+  install: false
+  version: 2.6.8
+  web:
+    host: xeai
+    port: 80
+    protocol: http
+    webroot: /xeai

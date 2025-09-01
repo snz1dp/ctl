@@ -1,0 +1,25 @@
+[submodule "pkg/istio/istio"]
+	path = pkg/istio/istio
+	url = https://github.com/istio/istio.git
+	tag = 1.6.5
+[submodule "pkg/istio/api"]
+	path = pkg/istio/api
+	url = https://github.com/istio/api
+	tag = 1.6.5
+[submodule "pkg/istio/pkg"]
+	path = pkg/istio/pkg
+	url = https://github.com/istio/pkg.git
+	tag = 1.6.5
+[submodule "pkg/istio/gogo-genproto"]
+	path = pkg/istio/gogo-genproto
+	url = https://github.com/istio/gogo-genproto.git
+	tag = 1.6.5
+[submodule "pkg/go-kong"]
+	path = pkg/go-kong
+	url = git@gitlab.snz1.cn:dp/ingress/go-kong.git
+	tag = v0.11.0-snz1
+[submodule "pkg/deck"]
+	path = pkg/deck
+	url = git@gitlab.snz1.cn:dp/ingress/deck.git
+	tag = v1.1.0-snz1
+	

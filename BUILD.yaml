@@ -1,0 +1,41 @@
+
+# 名称
+name: snz1dp-tools
+# 描述
+description: 慧码至一开发平台命令行工具
+
+# 镜像编译参数
+docker:
+  # 镜像名称
+  image: snz1.cn/snz1dp/tools
+  # 镜像编译文件(默认：Dockerfile)
+  file: Dockerfile
+  # 目标平台
+  platform:
+  - linux/amd64
+  - linux/arm64
+
+# 服务定义
+service:
+  # 端口定义
+  ports:
+  - 9091:80
+
+  # 环境变量
+  envs:
+  - TZ=Asia/Shanghai
+
+  # 心跳检查
+  healthcheck:
+    url: /health
+    interval: 10s
+    timeout: 10s
+    period: 30s
+    retries: 30
+
+  # 路由定义
+  ingress:
+  - backend-port: 80
+    strip-path: true
+    anonymous:
+    - /snz1dp/download

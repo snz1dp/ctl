@@ -1,0 +1,11 @@
+name: "snz1dp-keepalived"
+router_id: "snz1dp-appgateway"
+vrrp_check:
+  interval: 3
+  fall: 3
+  port: 0
+  rise: 2
+  timeout: 3
+vrrp_garp_master_delay: 3
+vrrp_mcast_group4: "224.0.0.18"
+vrrp_version: 2

@@ -1,0 +1,9 @@
+
+name: snz1dp-haproxy
+maxconn: 8192
+ulimit: 819200
+mode: http
+balance: source # roundrobin,source
+stats:
+  port: 8081
+  uri: /haproxy/stats

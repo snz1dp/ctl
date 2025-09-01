@@ -1,0 +1,47 @@
+pipeline {
+  agent {
+    node {
+      label "maven"
+    }
+  }
+  parameters {
+    string(name: 'REPO_SECRET', defaultValue: 'nexus-id', description: '发布仓库密钥')
+    string(name: 'K8S_SECRET', defaultValue: 'k8s-id', description: 'K8s部署密钥')
+    string(name: 'K8S_NAMESPACE', defaultValue: 'test', description: 'K8s部署名字空间/项目')
+    string(name: 'K8S_PULLIMAGE_SECRET', defaultValue: 'pull-image-secret', description: 'K8s拉取镜像密钥名称')
+  }
+  environment {
+    REPO_SECRET = "${params.REPO_SECRET}"
+    KUBECONFIG_CREDENTIAL_ID = "${params.K8S_SECRET}"
+    DEPLOY_NAMESPACE = "${params.K8S_NAMESPACE}"
+    PULL_IMAGE_SECRET = "${params.K8S_PULLIMAGE_SECRET}"
+  }
+  stages {
+    stage('Build') {
+      steps {
+        container ('maven') {
+          withCredentials([usernamePassword(passwordVariable: 'DPCTL_PASSWORD', usernameVariable: 'DPCTL_USERNAME' , credentialsId : "$REPO_SECRET" ,)]) {
+            sh 'chmod +x ${WORKSPACE}/.workflow/build.sh && ${WORKSPACE}/.workflow/build.sh'
+          }
+        }
+      }
+    }
+    stage('Publish') {
+      steps {
+        container ('maven') {
+          sh 'chmod +x ${WORKSPACE}/.workflow/publish.sh && ${WORKSPACE}/.workflow/publish.sh'
+        }
+      }
+    }
+    stage('Deploy') {
+      steps {
+        container ('maven') {
+          input(id: 'deploy-to-k8s', message: 'deploy-to-k8s?')
+          withCredentials([kubeconfigFile(credentialsId : "$KUBECONFIG_CREDENTIAL_ID" ,variable : "KUBECONFIG" ,)]) {
+            sh 'chmod +x ${WORKSPACE}/.workflow/deploy.sh && ${WORKSPACE}/.workflow/deploy.sh'
+          }
+        }
+      }
+    }
+  }
+}

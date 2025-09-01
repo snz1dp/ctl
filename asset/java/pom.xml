@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>{{ .Group }}</groupId>
+	<artifactId>{{ .Name }}</artifactId>
+	<packaging>jar</packaging>
+	<version>{{ .Version }}-SNAPSHOT</version>
+	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>com.snz1</groupId>
+		<artifactId>spring-boot2-app</artifactId>
+		<version>2.4.3</version>
+	</parent>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<jdbcrest.version>1.0.3-SNAPSHOT</jdbcrest.version>
+		<junit5.version>5.9.3</junit5.version>
+		<start-class>${package}.Application</start-class>
+	</properties>
+
+	<dependencies>
+
+		<!-- Junit4 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Junit5 -->
+    <dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>${junit5.version}</version>
+			<scope>test</scope>
+    </dependency>
+
+		<!-- SpringBootTest -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- CommonsLang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<!-- CommonsMatch3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+		</dependency>
+
+		<!-- CommonsIO -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
+		<!-- CommonsCodec -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+		<!-- CommonsCollections -->
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
+		<!-- BeanUtils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+
+		<!-- aspectjweaver -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+
+		<!-- FreeMarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+
+		<!-- GSON -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+
+		<!-- Web支持 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- 健康检测 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<!-- Mybatis -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-core</artifactId>
+		</dependency>
+
+		<!-- PostgresQL -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.snz1</groupId>
+			<artifactId>jdbcrest</artifactId>
+			<version>${jdbcrest.version}</version>
+			<classifier>depends</classifier>
+			<exclusions>
+
+				<!-- PostgreSQL -->
+				<exclusion>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+				</exclusion>
+
+				<!-- MySQL -->
+				<exclusion>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+				</exclusion>
+
+				<!-- mariadb -->
+				<exclusion>
+					<groupId>org.mariadb.jdbc</groupId>
+					<artifactId>mariadb-java-client</artifactId>
+				</exclusion>
+
+				<!-- DM8 -->
+				<!-- https://mvnrepository.com/artifact/com.dameng/DmJdbcDriver18 -->
+				<exclusion>
+					<groupId>com.dameng</groupId>
+					<artifactId>DmJdbcDriver18</artifactId>
+				</exclusion>
+
+				<!-- gBase9.5 -->
+				<exclusion>
+					<groupId>gbase</groupId>
+					<artifactId>gbase-connector</artifactId>
+				</exclusion>
+
+				<!-- clickhouse -->
+				<exclusion>
+					<groupId>com.clickhouse</groupId>
+					<artifactId>clickhouse-jdbc</artifactId>
+				</exclusion>
+
+				<!-- db2 -->
+				<exclusion>
+					<groupId>com.ibm.db2</groupId>
+					<artifactId>jcc</artifactId>
+				</exclusion>
+
+				<!-- postgis -->
+				<exclusion>
+					<groupId>net.postgis</groupId>
+					<artifactId>postgis-jdbc</artifactId>
+				</exclusion>
+
+				<!-- mssql -->
+				<exclusion>
+					<groupId>com.microsoft.sqlserver</groupId>
+					<artifactId>mssql-jdbc</artifactId>
+				</exclusion>
+
+				<!-- trino -->
+				<exclusion>
+					<groupId>io.trino</groupId>
+					<artifactId>trino-jdbc</artifactId>
+				</exclusion>
+
+				<!-- oracle -->
+				<exclusion>
+					<groupId>com.oracle.database.jdbc</groupId>
+					<artifactId>ojdbc8</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.oracle.database.nls</groupId>
+					<artifactId>orai18n</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>com.oracle.database.xml</groupId>
+					<artifactId>xmlparserv2</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>com.oracle.database.xml</groupId>
+					<artifactId>xdb6</artifactId>
+				</exclusion>
+
+				<!-- firebird -->
+				<exclusion>
+					<groupId>org.firebirdsql.jdbc</groupId>
+					<artifactId>jaybird</artifactId>
+				</exclusion>
+
+				<!-- opensearch jdbc -->
+				<exclusion>
+					<groupId>org.opensearch.driver</groupId>
+					<artifactId>opensearch-sql-jdbc</artifactId>
+				</exclusion>
+
+				<!-- taos jdbc -->
+				<exclusion>
+					<groupId>com.taosdata.jdbc</groupId>
+					<artifactId>taos-jdbcdriver</artifactId>
+				</exclusion>
+			</exclusions>
+
+		</dependency>
+
+		<dependency>
+			<groupId>api.gateway</groupId>
+			<artifactId>sc-client-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.snz1</groupId>
+			<artifactId>utility</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>io.springfox</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>{{ .Name }}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+
+			<!-- http://maven.apache.org/plugins/maven-jar-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>/*-dev.properties</exclude>
+						<exclude>/*-test.properties</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>central</name>
+			<url>https://repo1.maven.org/maven2/</url>
+			<releases>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>{{ .MavenID }}</id>
+			<name>{{ .MavenID }}</name>
+			<url>{{ .MavenURL }}</url>
+			<releases>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+	</repositories>
+
+</project>
