@@ -1,4 +1,4 @@
-# 慧码至一技术中台命令行工具
+# Snz1DPCtl
 
 > 这里懒得啰嗦，具体看这👉：<https://docs.dingtalk.com/i/nodes/1DKw2zgV2vkxoOzgf1rDyzwwVB5r9YAn>
 
